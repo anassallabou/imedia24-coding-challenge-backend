@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   main:
     banner-mode: off
@@ -5,11 +7,18 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: deferred
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:~/challenge
     username: sa
-    password: password
-    driver-class-name: org.h2.Driver
+    password:
+    driverClassName: org.h2.Driver
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
@@ -20,5 +29,7 @@ spring:
       hibernate:
         jdbc:
           batch_size: 1000
+        hbm2ddl:
+          auto: create
     hibernate:
       ddl-auto: validate
